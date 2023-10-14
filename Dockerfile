@@ -17,7 +17,7 @@ RUN mvn clean install
 FROM openjdk:17-jdk-slim
 
 # Copie o arquivo JAR construído do estágio de compilação
-COPY --from=build /app/target/todolist-1.0.0.jar /app.jar
+COPY --from=build /target/todolist-1.0.0.jar /app.jar
 
 # Exponha a porta na qual a aplicação será executada
 EXPOSE 8080
