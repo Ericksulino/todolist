@@ -3,6 +3,7 @@ FROM ubuntu:latest AS build
 RUN apt-get update
 RUN apt-get intall openjdk-17-jdk -y
 
+FROM openjdk:17-jdk-slim
 COPY . .
 
 RUN apt-get intall maven -y
