@@ -5,7 +5,10 @@ FROM openjdk:17-jdk-slim AS build
 RUN apt-get update && apt-get install -y maven
 
 # Copie o código-fonte da aplicação para o contêiner
-COPY . .
+COPY . /app
+
+# Defina o diretório de trabalho
+WORKDIR /app
 
 # Compile a aplicação
 RUN mvn clean install
@@ -14,7 +17,7 @@ RUN mvn clean install
 FROM openjdk:17-jdk-slim
 
 # Copie o arquivo JAR construído do estágio de compilação
-COPY --from=build /target/todolist-1.0.0.jar /app.jar
+COPY --from=build /app/target/todolist-1.0.0.jar /app.jar
 
 # Exponha a porta na qual a aplicação será executada
 EXPOSE 8080
